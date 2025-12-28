@@ -9,10 +9,12 @@ def display_board(board):
             return Fore.RED + cell + Style.RESET_ALL
         elif cell == "O":
             return Fore.BLUE + cell + Style.RESET_ALL
+        else:
+            return Fore.YELLOW + cell + Style.RESET_ALL
     print(" " + colored(board[0]) + " | " + colored(board[1]) + " | " + colored(board[2]))
-    print(Fore.CYAN + "-----------" + Syle.RESET_ALL)
+    print(Fore.CYAN + "-----------" + Style.RESET_ALL)
     print(" " + colored(board[3]) + " | " + colored(board[4]) + " | " + colored(board[5]))
-    print(Fore.CYAN + "-----------" + Syle.RESET_ALL)
+    print(Fore.CYAN + "-----------" + Style.RESET_ALL)
     print(" " + colored(board[6]) + " | " + colored(board[7]) + " | " + colored(board[8]))
     print()
 
@@ -46,8 +48,8 @@ def ai_move(board, ai_symbol, player_symbol):
                 return
     for i in range(9):
         if board[i].isdigit():
-            board_copy =board.copy
-            board_copy[i] = ai_symbol
+            board_copy =board.copy()
+            board_copy[i] = player_symbol
             if check_win(board_copy, player_symbol):
                 board[i] = ai_symbol
                 return
@@ -84,17 +86,18 @@ def tic_tac_toe():
                 player_move(board, player_symbol)
                 if check_win(board, player_symbol):
                     display_board(board)
-                    print("COngratulations! " + player_name + ", you have won the game!")
+                    print("Congratulations! " + player_name + ", you have won the game!")
                     game_on = False
                 else:
                     if check_full(board):
                         display_board(board)
                         print("It's a tie!")
+                        break
                     else:
                         turn = "AI"
             else:
                 ai_move(board, ai_symbol, player_symbol)
-                if check_win(baord, ai_symbol):
+                if check_win(board, ai_symbol):
                     display_board(board)
                     print("AI has won the game!")
                     game_on = False
